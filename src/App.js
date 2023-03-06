@@ -11,8 +11,10 @@ import { SnackbarProvider } from 'notistack';
 import CheckCircleOutlineRoundedIcon from '@material-ui/icons/CheckCircleOutlineRounded';
 import HighlightOffIcon from '@material-ui/icons/HighlightOff';
 import MessageAlert from "./components/MessageAlert";
+
 import Routes from "./routes/Routes";
 import maTheme from "./theme";
+import "./assets/css/style.css";
 
 
 const App = forwardRef(({ theme }, ref) => {
