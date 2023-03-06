@@ -11,16 +11,28 @@ export const DashboardRoute = props => {
 
     // check AUTH when load page
     useEffect(() => {
+        // const token = window.localStorage.getItem('token');
+        // console.log(`token: `, token);
+        console.log(`dashboardLayoutRoutes: `, dashboardLayoutRoutes);
+        /*if (token) {
+            setIsLogin(true);
+            setLoginCheck(false);
+        }
         setIsLogin(false);
-        setLoginCheck(false);
+        setLoginCheck(false);*/
     }, [])
-
-    if(!isLogin && !loginCheck){
+    console.log(`isLogin: ${isLogin}`);
+    console.log(`loginCheck: ${loginCheck}`);
+    /*if(!isLogin && !loginCheck){
         return <Redirect to={'/users/login'} />
-    }
+    }*/
 
-    return dashboardLayoutRoutes.map(({ id, title, children, path, component: Component }, index) =>
-        children ? (
+    return dashboardLayoutRoutes.map(({ id, title, children, path, component: Component }, index) => {
+        console.log(`id: ${id}`);
+        console.log(`title: ${title}`);
+        console.log(`path: ${path}`);
+        console.log(children?.component);
+        return children ? (
             // Route item with children
             children.map(({ name, title, path, component: Component }, index) => (
                 <Route
@@ -30,10 +42,11 @@ export const DashboardRoute = props => {
                     render={propsRoute => (
                         <DashboardLayout title={title ?? name} handleDrawerToggle={props.handleDrawerToggle}>
                             {
-                                loginCheck ?
+                                /*loginCheck ?
                                     Loader()
                                     :
-                                    <Component {...propsRoute} />
+                                    <Component {...propsRoute} />*/
+                                <Component {...propsRoute} />
                             }
                         </DashboardLayout>
                     )}
@@ -46,18 +59,19 @@ export const DashboardRoute = props => {
                 path={path}
                 exact
                 render={propsRoute => (
-                    <DashboardLayout title={title ?? id} handleDrawerToggle={props.handleDrawerToggle}>
+                    <DashboardLayout title={title ?? id ?? 'Simple23'} handleDrawerToggle={props.handleDrawerToggle}>
                         {
-                            loginCheck ?
+                            /*loginCheck ?
                                 Loader()
                                 :
-                                <Component {...propsRoute} />
+                                <Component {...propsRoute} />*/
+                            <Component {...propsRoute} />
                         }
                     </DashboardLayout>
                 )}
             />
         )
-    );
+    });
 }
 
 export default withRouter(DashboardRoute);

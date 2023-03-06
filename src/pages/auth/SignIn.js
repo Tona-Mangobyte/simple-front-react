@@ -3,10 +3,6 @@ import styled from "styled-components";
 import { useHistory } from "react-router-dom";
 
 import Helmet from 'react-helmet';
-import axios from 'axios';
-//import { useMutation, gql } from '@apollo/client';
-//import { LOGIN } from '../../graphql/commons/User';
-import queryString from 'query-string';
 
 import {
     FormControl,
@@ -17,7 +13,6 @@ import {
     Typography
 } from "@material-ui/core";
 
-//const Button = styled(MuiButton)(spacing);
 const Button = styled(MuiButton)`
   width: 200px;
 `;
@@ -49,11 +44,21 @@ const ButtonArea = styled.div`
 const SignIn = props => {
 
     const history = useHistory();
+    const [msgError, setMsgError] = React.useState('');
 
     const addLogin = (e) => {
-        history.push({
-            pathname: '/'
-        });
+        const login_id = e.target.elements.login_id.value;
+        const password = e.target.elements.password.value;
+        console.log(`login_id: ${login_id}`);
+        console.log(`password: ${password}`);
+        if (login_id === 'admin' && password === '123456') {
+            window.localStorage.setItem('token', 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC9tZHNqLXNhbGVzLXNlcnZlclwvYXBpXC9sb2dpbiIsImlhdCI6MTY3MzQyOTczMiwiZXhwIjoxOTg4OTYyNTMyLCJuYmYiOjE2NzM0Mjk3MzIsImp0aSI6IkJwZGtHTkVyTmNOd2x1V2wiLCJzdWIiOjUwMDAsInBydiI6ImUyYmEyMWExNmFmZWE4Y2JmMDVlYmY4N2JhZmU1ZWIzMDgyMzlhYzMifQ.rUCvj0a98GiG-UO4qxMilDMyIkP0ifWdbGFJapfL2FA');
+            history.push({
+                pathname: '/'
+            });
+        } else {
+            setMsgError('Authentication process is fail');
+        }
     };
 
     return (
@@ -65,12 +70,11 @@ const SignIn = props => {
             </Typography>
             <Typography align="center" style={{
                 color: "#d43f3a"
-            }}></Typography>
+            }}>{msgError}</Typography>
 
             <form
                 onSubmit={e => {
                     e.preventDefault();
-                    //addLogin({ variables: { email: e.target.elements.email.value, password: e.target.elements.password.value  } });
                     addLogin(e);
                 }}
             >
@@ -93,7 +97,7 @@ const SignIn = props => {
                         variant="contained"
                         color="primary"
                     >
-                        ログイン
+                        Login
                     </Button>
                 </ButtonArea>
             </form>

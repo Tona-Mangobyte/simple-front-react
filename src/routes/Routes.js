@@ -61,7 +61,7 @@ const DisplaySideBar = withRouter((props) => {
 
         Object.entries(authLayoutRoutes).forEach(([key, value]) => {
             Object.entries(value.children).forEach(([i, route]) => {
-                if(route.path == pathName){
+                if(route.path === pathName){
                     result = true;
                     return false;
                 }

@@ -291,13 +291,13 @@ function Sidebar({ classes, staticContext, location, ...rest }) {
     const scrollBarRef = useRef();
     const history = useHistory();
 
-    useEffect(()=>{
+    /*useEffect(()=>{
         const curr = scrollBarRef.current
         if (curr) {
             curr.scrollTop = window.localStorage.getItem("sidebarScrollTop")
         }
         rest.setMobileOpen(false)
-    }, []);
+    }, []);*/
 
     const setCurrentScroll = (pos) => {
         window.localStorage.setItem("sidebarScrollTop", pos);
@@ -409,11 +409,12 @@ function Sidebar({ classes, staticContext, location, ...rest }) {
                     <Grid item>
                         <div className="userProfileLink" onClick={goHome}>
                             <SidebarFooterText variant="body2">
-                                {window.localStorage.getItem('userName')}
+                                {/*{window.localStorage.getItem('userName')}*/}
+                                Admin
                             </SidebarFooterText>
-                            <SidebarFooterSubText variant="caption">
+                            {/*<SidebarFooterSubText variant="caption">
                                 {window.localStorage.getItem('departmentName')}
-                            </SidebarFooterSubText>
+                            </SidebarFooterSubText>*/}
                         </div>
                     </Grid>
                 </Grid>

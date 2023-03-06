@@ -26,7 +26,9 @@ const ResetPassword = async(() => import("../pages/auth/ResetPassword"));
 const Page404 = async(() => import("../components/layouts/Page404"));
 const Page500 = async(() => import("../components/layouts/Page500"));
 
-const Simple = async(() => import("../pages/simple"));
+const SimpleAsync = async(() => import("../pages/simple"));
+
+const ProductList = async(() => import("../pages/product/List"));
 
 const authRoutes = {
     path: "/auth",
@@ -56,13 +58,43 @@ const authRoutes = {
 };
 
 const topPageRoutes = {
+    id: "simple",
     path: "/",
-    component: Simple,
+    component: SimpleAsync,
     children: null
+};
+
+const simplePageRoutes = {
+    id: "simple",
+    path: "/simple",
+    icon: <User />,
+    component: SimpleAsync,
+    children: null
+};
+
+const productPageRoutes = {
+    id: "product",
+    path: "/product",
+    icon: <Package />,
+    children: [
+        {
+            path: "/products/list",
+            name: "List",
+            component: ProductList,
+            title: 'Product List'
+        }
+    ]
 };
 
 // Routes using the Auth layout
 export const authLayoutRoutes = [authRoutes];
 
-export const dashboardLayoutRoutes = [];
-export const sidebarRoutes = [];
+export const dashboardLayoutRoutes = [
+    topPageRoutes,
+    simplePageRoutes,
+    productPageRoutes
+];
+export const sidebarRoutes = [
+    simplePageRoutes,
+    productPageRoutes
+];

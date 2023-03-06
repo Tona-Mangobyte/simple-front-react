@@ -1,7 +1,16 @@
 import React from "react";
+import Helmet from "react-helmet";
 
-export const Simple = (props) => {
+const SimplePage = (props) => {
+    console.log(`execute Simple `);
     return(
-        <h4> Hello world </h4>
+        <React.Fragment>
+        <Helmet title="Simple page" />
+        <div className="page-header">
+            <h4> Hello world </h4>
+        </div>
+        </React.Fragment>
     );
 }
+
+export default SimplePage;
